@@ -6,6 +6,7 @@ Difficulty=20
 
 [Definitions]
 Definition1=Objects.ocd
+Definition2=Infinity.ocd
 
 [Player1]
 Crew=Clonk=1
