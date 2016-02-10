@@ -6,14 +6,12 @@ protected func InitializePlayer() {
  
 protected func Initialize()
 {
-	/*// Create parkour goal & checkpoints.
+	// Create parkour goal & checkpoints.
 	var goal = CreateObject(Goal_Parkour, 0, 0, NO_OWNER);
 	var mode = PARKOUR_CP_Respawn | PARKOUR_CP_Check | PARKOUR_CP_Ordered;
-	goal->SetStartpoint(90, 345);
-	goal->AddCheckpoint(630, 215, mode);
-	goal->AddCheckpoint(211, 105, mode);
-	goal->SetFinishpoint(80, 345);
-	*/
+	goal->SetStartpoint(50, 140);
+	goal->SetFinishpoint(3145, 145);
+	
 
 	for (var count = 0; count < 20; count++)
 	{
@@ -21,6 +19,7 @@ protected func Initialize()
 		draft->SetR(Random(360));
 	}
 
+	PlaceObjects(Loam, 25, "Earth");
 	PlaceGrass(1000);
 }
 
