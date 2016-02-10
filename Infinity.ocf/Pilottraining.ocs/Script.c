@@ -15,6 +15,12 @@ protected func Initialize()
 	goal->SetFinishpoint(80, 345);
 	*/
 
+	for (var count = 0; count < 20; count++)
+	{
+		var draft = CreateObject(Draft);
+		draft->SetR(Random(360));
+	}
+
 	PlaceGrass(1000);
 }
 
