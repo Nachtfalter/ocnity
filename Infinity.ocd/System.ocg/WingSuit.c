@@ -11,6 +11,13 @@ protected func ObjectControlMovement(int plr, int ctrl, int strength, bool relea
 		}
 		return true;
 	}
+	if(!release && IsGliding()) {
+		if(ctrl == CON_Left) {
+			SetDir(DIR_Left);
+		} else if(ctrl == CON_Right) {
+			SetDir(DIR_Right);
+		}
+	}
 	return _inherited(plr, ctrl, strength, release, repeat);
 }
 
