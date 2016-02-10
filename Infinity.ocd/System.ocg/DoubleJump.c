@@ -31,17 +31,20 @@ protected func ObjectControlMovement(int plr, int ctrl, int strength, bool relea
 
 protected func StartJump() {
 	doubleJumpPossible = true;
+	AddEffect("CheckMaxDoubleJumpSpeed", this, 10, 10, this);
 	return _inherited(...);
 }
 
-protected func CheckStuck() {
+protected func FxCheckMaxDoubleJumpSpeedTimer() {
 	if(IsJumping()) {
 		// Visual clue that double jump is not available any more: Tumble if falling speed is too high.
 		if(GetYDir() > maxDoubleJumpStartSpeed && !(this->~IsGliding())) {
 			SetAction("Tumble");
+		} else {
+			return FX_OK;
 		}
 	}
-	return _inherited(...);
+	return FX_Execute_Kill;
 }
 
 // Stolen from Knüppeln.c4d
