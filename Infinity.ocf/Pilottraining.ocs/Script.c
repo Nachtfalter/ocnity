@@ -2,8 +2,8 @@
 
 protected func InitializePlayer() {
     //SetFoW (false);
- }
- 
+}
+	
 protected func Initialize()
 {
 	// Create parkour goal & checkpoints.
@@ -23,16 +23,10 @@ protected func Initialize()
 	PlaceGrass(1000);
 }
 
-/*
+
 // Gamecall from parkour goal, on respawning.
 protected func OnPlayerRespawn(int plr, object cp)
 {
 	var clonk = GetCrew(plr);
-	clonk->CreateContents(Boompack);
+	clonk->CreateContents(Shovel);
 }
-
-global func FxRespawnBoomTimer(object target, effect, int time)
-{
-	target->CreateContents(Boompack);
-	return -1;
-}*/
