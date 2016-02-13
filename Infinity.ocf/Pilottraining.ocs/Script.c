@@ -24,7 +24,10 @@ protected func Initialize() {
 	//  Place Drafts
 	for (var count = 0; count < 20; count++) {
 		var draft = CreateObject(Draft);
-		draft->SetR(Random(360));
+		// Most drafts look up.
+		var r = RandomX(-90, 90);
+		if (!Random(3)) r += 180;
+		draft->SetR(r);
 	}
 
 	PlaceObjects(Loam, 25, "Earth");
