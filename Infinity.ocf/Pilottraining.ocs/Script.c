@@ -1,24 +1,36 @@
 /*-- Pilotrace --*/
 
+static const CHECKPOINT_COUNT = 3;
+static const CHECKPOINT_PADDING = 50;
+
 protected func InitializePlayer() {
 	//SetFoW (false);
+}
+
+// Tries to find a suitable position in the air.
+private func FindCheckpointPosition(int x) {
+	var i = 100;
+	while (i--) {
+		var y = RandomX(CHECKPOINT_PADDING, LandscapeHeight() - CHECKPOINT_PADDING);
+		if (!GBackSemiSolid(x, y)) break;
+	}
+	return {x = x, y = y};
 }
 	
 protected func Initialize() {
 	// Create parkour goal & checkpoints.
 	var goal = CreateObject(Goal_Parkour, 0, 0, NO_OWNER);
 	var mode = PARKOUR_CP_Respawn | PARKOUR_CP_Check | PARKOUR_CP_Ordered;
-	var checkpoint_padding = 50;
-	goal->SetStartpoint(checkpoint_padding, 140);
-	goal->SetFinishpoint(LandscapeWidth() - checkpoint_padding, 145);
+	goal->SetStartpoint(CHECKPOINT_PADDING, 140);
+	goal->SetFinishpoint(LandscapeWidth() - CHECKPOINT_PADDING, 145);
 	
-	var checkpoint_count = 3;
-	var checkpoint_distance = (LandscapeWidth() - 2 * checkpoint_padding) / (checkpoint_count + 1);
-	for (var i = 1; i <= checkpoint_count; i++) {
-		goal->AddCheckpoint(
-			checkpoint_padding + i * checkpoint_distance,
-			RandomX(checkpoint_padding, LandscapeHeight() - checkpoint_padding),
-			mode);
+	var checkpoint_distance = (LandscapeWidth() - 2 * CHECKPOINT_PADDING) / (CHECKPOINT_COUNT + 1);
+	for (var i = 1; i <= CHECKPOINT_COUNT; i++) {
+		var p = FindCheckpointPosition(CHECKPOINT_PADDING + i * checkpoint_distance);
+		goal->AddCheckpoint(p.x, p.y, mode);
+		// Add a permanent draft for each checkpoint.
+		var draft = CreateObject(Draft, p.x, p.y + 50);
+		draft->SetPermanent();
 	}
 
 	//  Place Drafts
